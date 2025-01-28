@@ -9,6 +9,11 @@ fi
 # Define the destination directory for .nfo files
 diretorio_destino="/home/$USER/nzb/"
 
+# Ensure the destination directory exists
+if [ ! -d "$diretorio_destino" ]; then
+    mkdir -p "$diretorio_destino"
+fi
+
 # Function to handle file operations
 process_file() {
     local arquivo="$1"
