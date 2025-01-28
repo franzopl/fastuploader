@@ -45,26 +45,19 @@ process_file() {
     ngPost -i "$arquivo" $pack_args
 }
 
-# Function to handle directory operations
+# Function to handle directory operations (now processes all files in directory)
 process_directory() {
     local diretorio="$1"
     local use_pack="$2"
     local obfuscate="$3"
     
-    # Decide which ngPost command to use based on the pack option
-    local pack_args=""
-    if [ "$use_pack" = "true" ]; then
-        pack_args="--pack"
-    else
-        pack_args="--gen_par2"
-    fi
-    
-    # Add obfuscation if specified
-    if [ "$obfuscate" = "true" ]; then
-        pack_args="$pack_args -x"
-    fi
-    
-    ngPost --auto "$diretorio" $pack_args
+    # Loop through all files in the directory
+    for arquivo in "$diretorio"/*; do
+        if [ -f "$arquivo" ]; then
+            # Process each file in the directory
+            process_file "$arquivo" "$use_pack" "$obfuscate"
+        fi
+    done
 }
 
 # Parse command line options
@@ -86,7 +79,7 @@ if [ -f "$1" ]; then
     # If the argument is a file
     process_file "$1" "$use_pack" "$obfuscate"
 elif [ -d "$1" ]; then
-    # If the argument is a directory
+    # If the argument is a directory, process each file within it
     process_directory "$1" "$use_pack" "$obfuscate"
 else
     echo "O argumento fornecido não é um arquivo ou diretório válido."
