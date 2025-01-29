@@ -6,14 +6,14 @@ Um script para facilitar o uso do ngPost
 
 - É necessário instalar o ngPost antes de executar o script, recomendo instalar o appimage.
   
-    wget https://github.com/mbruel/ngPost/releases/download/v4.16/ngPost_v4.16_libssl3-x86_64.AppImage # verifique a melhor versão
-    sudo chmod +x ngPost_v4.16_libssl3-x86_64.AppImage # torna o arquivo executável
-    sudo mv ngPost_v4.16_libssl3-x86_64.AppImage /usr/local/bin/ngPost # envia ngPost para o PATH do sistema
+    wget https://github.com/mbruel/ngPost/releases/download/v4.16/ngPost_v4.16_libssl3-x86_64.AppImage # verifique a melhor versão  
+    sudo chmod +x ngPost_v4.16_libssl3-x86_64.AppImage # torna o arquivo executável  
+    sudo mv ngPost_v4.16_libssl3-x86_64.AppImage /usr/local/bin/ngPost # envia ngPost para o PATH do sistema  
 
-- Também é necessário instalar o mediainfo.
-    sudo apt install mediainfo #ubuntu
-    sudo dnf install mediainfo #fedora
-    *verifique o gerenciador de pacotes da sua distribuição linux
+- Também é necessário instalar o mediainfo.  
+    sudo apt install mediainfo #ubuntu  
+    sudo dnf install mediainfo #fedora  
+    *verifique o gerenciador de pacotes da sua distribuição linux  
 
 - o arquivo ngPost.conf deve ser renomeado para .ngPost e colocado na pasta pessoal do usuário.
 
