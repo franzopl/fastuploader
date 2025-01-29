@@ -29,14 +29,14 @@ RAR_PATH = /usr/bin/rar
 
 
 [server]
-host = usnews.blocknews.net
-port = 563
-ssl  = true
-user =
-pass =
-connection = 40
-enabled = true
-nzbCheck = false
+host = usnews.blocknews.net  
+port = 563  
+ssl  = true  
+user =  
+pass =  
+connection = 40  
+enabled = true  
+nzbCheck = false  
 
     preencha aqui os dados do seu servidor
 
