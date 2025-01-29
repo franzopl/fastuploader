@@ -7,7 +7,7 @@ cd /home/$USER/nzb/ || exit
 mkdir -p enviados
 
 # Variável para armazenar a chave da API (substitua com sua chave real)
-myapikey="koxEbgbGUPnBOfBcPV6taHl3VuxhwSPR"
+myapikey="dasdlhashdohqwid019230asd1w3sd"
 
 # Loop para processar cada arquivo .nzb
 for nzb_file in *.nzb; do
