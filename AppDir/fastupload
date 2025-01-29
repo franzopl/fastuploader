@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# Check if at least one argument is provided
+if [ $# -eq 0 ]; then
+    echo "Por favor, forneça um arquivo ou diretório."
+    exit 1
+fi
+
+# Define the destination directory for .nfo files
+diretorio_destino="/home/$USER/nzb/"
+
+# Ensure the destination directory exists
+if [ ! -d "$diretorio_destino" ]; then
+    mkdir -p "$diretorio_destino"
+fi
+
+# Function to handle file operations
+process_file() {
+    local arquivo="$1"
+    local use_pack="$2"
+    local obfuscate="$3"
+    
+    # Get the base name of the file without extension
+    nome_base=$(basename "$arquivo" | sed 's/\.[^.]*$//')
+    
+    # Generate .nfo file using mediainfo
+    mediainfo "$arquivo" > "${nome_base}.nfo"
+    
+    # Move the .nfo file to the specified directory
+    mv "${nome_base}.nfo" "$diretorio_destino"
+    
+    # Decide which ngPost command to use based on the pack option
+    local pack_args=""
+    if [ "$use_pack" = "true" ]; then
+        pack_args="--pack"
+    else
+        pack_args="--gen_par2"
+    fi
+    
+    # Add obfuscation if specified
+    if [ "$obfuscate" = "true" ]; then
+        pack_args="$pack_args -x"
+    fi
+    
+    ngPost -i "$arquivo" $pack_args
+}
+
+# Function to handle directory operations (now processes all files in directory)
+process_directory() {
+    local diretorio="$1"
+    local use_pack="$2"
+    local obfuscate="$3"
+    
+    # Loop through all files in the directory
+    for arquivo in "$diretorio"/*; do
+        if [ -f "$arquivo" ]; then
+            # Process each file in the directory
+            process_file "$arquivo" "$use_pack" "$obfuscate"
+        fi
+    done
+}
+
+# Parse command line options
+use_pack=false
+obfuscate=false
+while getopts ":px" opt; do
+  case $opt in
+    p) use_pack=true ;;
+    x) obfuscate=true ;;
+    \?) echo "Opção inválida -$OPTARG" >&2; exit 1 ;;
+  esac
+done
+
+# Remove processed options from the argument list
+shift $((OPTIND - 1))
+
+# Main logic
+if [ -f "$1" ]; then
+    # If the argument is a file
+    process_file "$1" "$use_pack" "$obfuscate"
+elif [ -d "$1" ]; then
+    # If the argument is a directory, process each file within it
+    process_directory "$1" "$use_pack" "$obfuscate"
+else
+    echo "O argumento fornecido não é um arquivo ou diretório válido."
+    exit 1
+fi

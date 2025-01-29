@@ -1,0 +1,18 @@
+#!/bin/sh
+# Este script é usado para iniciar o seu aplicativo a partir do AppImage
+
+# Determina o diretório do script (AppDir)
+HERE=$(dirname "$(readlink -f "${0}")")
+
+# Configura o PATH para incluir os binários na pasta bin dentro de AppDir
+export PATH="${HERE}/bin:${PATH}"
+
+# Configura o LD_LIBRARY_PATH se necessário para bibliotecas
+# Note que se os binários não dependem de bibliotecas externas, isto pode não ser necessário
+export LD_LIBRARY_PATH="${HERE}/lib:${LD_LIBRARY_PATH}"
+
+# Aqui você pode definir quaisquer outras variáveis de ambiente necessárias
+
+# Comando para iniciar seu script Bash
+# Suponhamos que seu script principal se chama 'main.sh' e está na raiz de AppDir
+exec "${HERE}/fastupload" "$@"
