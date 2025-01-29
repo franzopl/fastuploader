@@ -37,7 +37,7 @@ Um script para facilitar o uso do ngPost
     
   - o arquivo ngPost.conf deve ser renomeado para .ngPost e colocado na pasta pessoal do usuário.
 
-      mv ./fastuploader/config/ngPost.conf ~/$USER/.ngPost
+      mv ./fastuploader/config/ngPost.conf ~/.ngPost
 
 - Dentro do arquivo .ngPost devem ser editados as seguintes linhas:
 
@@ -69,7 +69,7 @@ Os outros dados podem ser adaptados a sua necessidade seguindo a configuração 
 Realizada a configuração inicial você pode enviar o script fastuploader para o PATH  
 
       sudo chmod +x ./scripts/fastupload
-      sudo ln ./scripts/fastupload /usr/bin/fastupload
+      sudo cp ./scripts/fastupload /usr/bin/fastupload
 
 
 após instalado no PATH basta realizar os seguintes comandos para realizar o upload:
